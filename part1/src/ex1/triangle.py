@@ -19,10 +19,10 @@ class Triangle:
   
   #area of triangle : 
   def area(self):
-    return 0.5*((self.pt1.get_x()*(self.pt2.get_y()-self.pt3.get_y())) 
+    return 0.5*abs(((self.pt1.get_x()*(self.pt2.get_y()-self.pt3.get_y())) 
               +(self.pt2.get_x()*(self.pt3.get_y()-self.pt1.get_y())) 
-              +(self.pt3.get_x()*(self.pt1.get_y()-self.pt2.get_y())))
-
+              +(self.pt3.get_x()*(self.pt1.get_y()-self.pt2.get_y()))))
+ 
   # True if point inside the triangle else False
   # https://www.youtube.com/watch?v=H9qu9Xptf-w
   def check_pt_triangle(self, pt_test):
