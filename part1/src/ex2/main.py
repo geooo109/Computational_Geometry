@@ -3,7 +3,7 @@ from circle import *
 def parse_input():
   in_str = input("Give Radius of Circle:")
   r = float(in_str)
-  if r <= 0:
+  if int(r) <= 0:
     return None
   return Circle(Point(0,0), r)
 
