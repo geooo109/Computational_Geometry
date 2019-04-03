@@ -18,20 +18,20 @@ def parse_input():
 
 def main():
     try:
-		poss_trian = parse_input()
-	except:
-  		print("Error on creating an Object Triangle")
-  	if poss_trian is None:
-		print ("Input points could not construct a Triagnle")
-		return
-	poss_trian.print_triangle()
-	pt0 = Point(0,0)
-	if poss_trian.check_pt_triangle(pt0) == True:
-		print ("Triangle contains (0,0)")
-	else:
-		print ("Triangle dosen't contain (0,0)")
+        poss_trian = parse_input()
+    except:
+        print("Error on creating an Object Triangle")
+    if poss_trian is None:
+        print ("Input points could not construct a Triagnle")
+        return
+    poss_trian.print_triangle()
+    pt0 = Point(0,0)
+    if poss_trian.check_pt_triangle(pt0) == True:
+        print ("Triangle contains (0,0)")
+    else:
+        print ("Triangle dosen't contain (0,0)")
 
 
 
 if __name__ == "__main__":
-	main()
+    main()

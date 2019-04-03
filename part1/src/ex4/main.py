@@ -1,13 +1,15 @@
 from point import *
 from plane import *
 def parse_input():
-    print("Give Points of the Plane in the form (x,y) to stop type ->quit<-:")
+    print("Give Points of the Plane in the form x,y to stop type ->quit<-:")
     points = []
     while True:
         in_str = raw_input()
-    if in_str == "quit":
-        break
-    points.append(Point(int(in_str[0]),int(in_str[1])))
+        in_str = in_str.split(",")
+        #sometimes i forget what i have to write :P
+        if in_str == "quit" or in_str == "exit" or in_str == "stop":
+            break
+        points.append(Point(int(in_str[0]),int(in_str[1])))
     return Plane(points)
 
 
