@@ -5,10 +5,10 @@ def parse_input():
     points = []
     while True:
         in_str = raw_input()
-        in_str = in_str.split(",")
         #sometimes i forget what i have to write :P
         if in_str == "quit" or in_str == "exit" or in_str == "stop":
             break
+        in_str = in_str.split(",")
         points.append(Point(int(in_str[0]),int(in_str[1])))
     return Plane(points)
 
