@@ -1,6 +1,5 @@
 from point import *
 import matplotlib.pyplot as plt
-
 #define
 COLINEAR = 0
 CCW = 1
@@ -23,6 +22,20 @@ class Plane:
         for point in self.points:
             point.print_point()
 
+    #this functions check if 2 points share shame x
+    def check_points(self):
+        curr = 0
+        l_size = len(self.points)
+        while True:
+            if curr >= l_size:
+                break
+            for i in range(curr+1,l_size):
+                if self.points[i].get_x() == self.points[curr].get_x():
+                    print("Poss are (%s,%s)"%(i,curr))
+                    return True
+            curr += 1
+        return False 
+        
     def ort(self, pt1 , pt2, r):
         v = ((pt2.get_y()-pt1.get_y())*(r.get_x()-pt2.get_x())
             -(pt2.get_x()-pt1.get_x())*(r.get_y()-pt2.get_y()))
@@ -44,13 +57,15 @@ class Plane:
 
         # hull points
         hx = [pt.get_x() for pt in hull_points]
+        hx.append(hull_points[0].get_x())
         hy = [pt.get_y() for pt in hull_points]
+        hy.append(hull_points[0].get_y())
         plt.plot(hx, hy, "r-")
         plt.title('Convex Hull Points (red color)')
-        plt.ion()
+        #plt.ion()
         plt.show()
-        plt.draw()
-        plt.pause(1)
+        #plt.draw()
+        #plt.pause(100)
 
     def find_left_most_pt(self):
         left_pt = 0
@@ -70,7 +85,8 @@ class Plane:
             curr_pt = (cr_pt+1)%total_points
             #check for orientation of all other Points
             for i in range(0, total_points):
-                if self.ort(self.points[cr_pt], self.points[i], self.points[curr_pt]) == CCW:
+                ort = self.ort(self.points[cr_pt], self.points[i], self.points[curr_pt])
+                if ort == CCW:
                     curr_pt = i
             cr_pt = curr_pt
             if cr_pt == left_pt:

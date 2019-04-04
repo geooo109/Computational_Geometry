@@ -3,7 +3,7 @@ from plane import *
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-RANGE_XY = 600
+RANGE_XY = 600000
 def parse_input():
     points = []
     ch = raw_input("To autogenerate write ->AUTO<- else just type something: ")
@@ -27,6 +27,9 @@ def main():
         plane = parse_input()
     except:
         print("Error on input of the plane data points")
+    #check for SAME X Points
+    if plane.check_points() == True:
+        print("***Found 2 Points with same x, Algorithm ends***")
         return
     plane.print_plane()
     plane.gift_wrap_convex_hull()
