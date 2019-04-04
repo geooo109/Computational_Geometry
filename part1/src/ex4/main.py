@@ -2,6 +2,8 @@ from point import *
 from plane import *
 import numpy as np
 import matplotlib.pyplot as plt
+import time
+RANGE_XY = 600
 def parse_input():
     points = []
     ch = raw_input("To autogenerate write ->AUTO<- else just type something: ")
@@ -16,7 +18,7 @@ def parse_input():
             points.append(Point(int(in_str[0]),int(in_str[1])))
     else:
         num_points = int(raw_input("Enter number of Points: "))
-        points = np.array([Point(np.random.randint(0,400),np.random.randint(0,400)) for i in range(num_points)])
+        points = np.array([Point(np.random.randint(0, RANGE_XY),np.random.randint(0, RANGE_XY)) for i in range(num_points)])
     return Plane(points)
 
 
@@ -27,6 +29,7 @@ def main():
         print("Error on input of the plane data points")
         return
     plane.print_plane()
+    plane.gift_wrap_convex_hull()
 
 if __name__ == "__main__":
     main()

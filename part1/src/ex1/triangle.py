@@ -1,4 +1,6 @@
 from point import *
+import matplotlib.pyplot as plt
+
 '''
  Class to represent a triangle
 '''
@@ -30,3 +32,22 @@ class Triangle:
         tr2 = Triangle(pt_test, self.pt2, self.pt3)
         tr3 = Triangle(pt_test, self.pt3, self.pt1)
         return tr1.area()+tr2.area()+tr3.area() == self.area()
+
+    def display_triangle_and_test_point(self, pt_test):
+        # all points of dataset
+        x = []
+        y = []
+        x.append(self.pt1.get_x())
+        x.append(self.pt2.get_x())
+        x.append(self.pt3.get_x())
+        y.append(self.pt1.get_y())
+        y.append(self.pt2.get_y())
+        y.append(self.pt3.get_y())
+        plt.plot(x, y, "r-")
+
+        #for test point
+        plt.scatter([pt_test.get_x()], [pt_test.get_y()])
+
+        plt.title('Triangle (red color), Test Point (blue color)')
+        plt.show()
+        return
