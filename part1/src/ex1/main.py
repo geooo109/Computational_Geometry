@@ -4,7 +4,7 @@ from triangle import *
  Reads 3 points and constructs the triangle
 '''
 def parse_input():
-    print "All input points must be in the form (x,y)"
+    print("All input points must be in the form (x,y)")
     in_str = input("Enter Point1(x1,y1):")
     pt1 = Point(int(in_str[0]),int(in_str[1]))
     in_str = input("Enter Point2(x2,y2):")

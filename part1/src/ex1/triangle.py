@@ -11,7 +11,7 @@ class Triangle:
         self.pt3 = pt3
 
     def print_triangle(self):
-        print "\n**Points of Possible Triangle** /_\\ are:"
+        print("\n**Points of Possible Triangle** /_\\ are:")
         self.pt1.print_point()
         self.pt2.print_point()
         self.pt3.print_point()

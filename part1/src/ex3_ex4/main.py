@@ -30,6 +30,7 @@ def main():
         return
     plane.print_plane()
     plane.gift_wrap_convex_hull()
+    plane.incremental_convex_hull()
 
 if __name__ == "__main__":
     main()

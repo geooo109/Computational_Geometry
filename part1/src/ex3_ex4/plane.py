@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 COLINEAR = 0
 CCW = 1
 CW = -1
+
+def sort_function(point):
+        return point.get_x()
+
 class Plane:
     def __init__(self, points):
         self.points = points
@@ -31,7 +35,7 @@ class Plane:
 
     def display_hull(self, hull_points):
         if hull_points == []:
-            print "No points on the hull list to display"
+            print("No points on the hull list to display")
             return
         # all points of dataset
         x = [pt.get_x() for pt in self.points]
@@ -42,9 +46,11 @@ class Plane:
         hx = [pt.get_x() for pt in hull_points]
         hy = [pt.get_y() for pt in hull_points]
         plt.plot(hx, hy, "r-")
-
         plt.title('Convex Hull Points (red color)')
+        plt.ion()
         plt.show()
+        plt.draw()
+        plt.pause(1)
 
     def find_left_most_pt(self):
         left_pt = 0
@@ -71,3 +77,7 @@ class Plane:
                 break
         self.display_hull(hull_points)
         return
+
+    def incremental_convex_hull(self):
+        sorted(self.points,key = sort_function)
+        self.print_plane()
