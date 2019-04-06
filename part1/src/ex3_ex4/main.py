@@ -3,7 +3,7 @@ from plane import *
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-RANGE_XY = 10000
+RANGE_XY = 1000000
 def parse_input():
     points = []
     ch = raw_input("To autogenerate write ->AUTO<- else just type something: ")
@@ -31,10 +31,10 @@ def main():
     if plane.check_points() == True:
         print("***Found 2 Points with same x, Algorithm ends***")
         return
-    choice = raw_input("Type (1) for Incremental / Type (2) for Gift Wrap")
+    choice = raw_input("Type (1) for Incremental / Type (2) for Gift Wrap: ")
     while True:
         if choice == "1":
-            print(plane.incremental_convex_hull())
+            plane.incremental_convex_hull()
             break
         elif choice == "2":
             plane.gift_wrap_convex_hull()

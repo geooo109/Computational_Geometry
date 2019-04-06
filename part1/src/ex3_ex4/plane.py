@@ -36,7 +36,8 @@ class Plane:
             curr += 1
         return False
 
-    def ort(self, pt1 , pt2, r):
+    #if we start from left to right
+    def ort_min_max(self, pt1 , pt2, r):
         v = ((pt2.get_y()-pt1.get_y())*(r.get_x()-pt2.get_x())
             -(pt2.get_x()-pt1.get_x())*(r.get_y()-pt2.get_y()))
         if v == 0:
@@ -46,10 +47,13 @@ class Plane:
         else:
             return CCW
 
-    def cross(self, pt1 , pt2, r):
+    #if we start from right to left
+    def ort_max_min(self, pt1 , pt2, r):
         v = ((pt2.get_x()-pt1.get_x())*(r.get_y()-pt2.get_y())
             -(pt2.get_y()-pt1.get_y())*(r.get_x()-pt2.get_x()))
-        if v <= 0:
+        if v == 0:
+            return COLINEAR
+        elif v < 0:
             return CW
         else:
             return CCW
@@ -86,41 +90,52 @@ class Plane:
         return point.get_x()
 
     def incremental_convex_hull(self):
-        lowerHull = []
-        upperHull = []
+        lower_hull = []
+        upper_hull = []
 
-        if len(self.points) == 0:
+        if len(self.points) <= 1:
             return self.points
 
-        #sorting list based on x coord
-        #self.print_plane()
-        self.points = sorted(self.points,key=self.sort_function)
-        #self.print_plane()
+        #sorting list based on x coord {max -> min}
+        self.points = sorted(self.points,key = self.sort_function, reverse = True)
         N = len(self.points)
 
         # culculating lower hull #
         for idx in range(N):
-            #print idx
-            while len(lowerHull) >= 2 and self.cross(lowerHull[-2], lowerHull[-1], self.points[idx]) == CW:
-                lowerHull.pop()
-            lowerHull.append(self.points[idx])
+            while True:
+                curr_len = len(lower_hull)
+                if (curr_len >= 2):
+                    ort = self.ort_max_min(lower_hull[-2], lower_hull[-1], self.points[idx])
+                    if ort == CW:
+                        lower_hull.pop()
+                    elif ort == CCW:
+                        break
+                    else:
+                        print ("COLINEAR points in the lower_hull")
+                else:
+                    break
+            lower_hull.append(self.points[idx])
 
         # culculating upper hull #
+        self.points.reverse()
         for idx in range(N):
-            self.points.reverse()
-            #self.print_plane()
-            while len(upperHull) >= 2 and \
-                    (self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == CCW or \
-                    self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == COLINEAR):
-                upperHull.pop()
-            upperHull.append(self.points[idx])
+            while True:
+                curr_len = len(upper_hull)
+                if (curr_len >= 2):
+                    ort = self.ort_max_min(upper_hull[-2], upper_hull[-1], self.points[idx])
+                    if ort == CW:
+                        upper_hull.pop()
+                    elif ort == CCW:
+                        break
+                    else:
+                        print ("COLINEAR points in the lower_hull")
+                else:
+                    break
+            upper_hull.append(self.points[idx])
 
-        #pop common point
-        lowerHull.pop()
-        hull = lowerHull + upperHull
-        #self.display_hull(lowerHull)
-        #self.display_hull(upperHull)
+        hull = lower_hull + upper_hull
         self.display_hull(hull)
+        return
 
 
     def gift_wrap_convex_hull(self):
@@ -134,7 +149,7 @@ class Plane:
             curr_pt = (cr_pt+1)%total_points
             #check for orientation of all other Points
             for i in range(0, total_points):
-                ort = self.ort(self.points[cr_pt], self.points[i], self.points[curr_pt])
+                ort = self.ort_min_max(self.points[cr_pt], self.points[i], self.points[curr_pt])
                 if ort == CCW:
                     curr_pt = i
             cr_pt = curr_pt
