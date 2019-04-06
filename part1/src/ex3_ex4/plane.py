@@ -74,26 +74,6 @@ class Plane:
                 left_pt = i
         return left_pt
 
-    def gift_wrap_convex_hull(self):
-        hull_points = []
-        #find leftmost point
-        left_pt = self.find_left_most_pt()
-        total_points = len(self.points)
-        cr_pt = left_pt
-        while True:
-            hull_points.append(self.points[cr_pt])
-            curr_pt = (cr_pt+1)%total_points
-            #check for orientation of all other Points
-            for i in range(0, total_points):
-                ort = self.ort(self.points[cr_pt], self.points[i], self.points[curr_pt])
-                if ort == CCW:
-                    curr_pt = i
-            cr_pt = curr_pt
-            if cr_pt == left_pt:
-                break
-        self.display_hull(hull_points)
-        return
-
     def sort_function(self,point):
         return point.get_x()
 
@@ -120,9 +100,9 @@ class Plane:
             lowerHull.append(self.points[idx])
 
         # culculating upper hull #
-        self.points.reverse()
-        #self.print_plane()
         for idx in range(N):
+            self.points.reverse()
+            #self.print_plane()
             while len(upperHull) >= 2 and \
                     (self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == CCW or \
                     self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == COLINEAR):
@@ -132,6 +112,27 @@ class Plane:
         #pop common point
         lowerHull.pop()
         hull = lowerHull + upperHull
-        self.display_hull(lowerHull)
-        self.display_hull(upperHull)
+        #self.display_hull(lowerHull)
+        #self.display_hull(upperHull)
         self.display_hull(hull)
+
+
+    def gift_wrap_convex_hull(self):
+        hull_points = []
+        #find leftmost point
+        left_pt = self.find_left_most_pt()
+        total_points = len(self.points)
+        cr_pt = left_pt
+        while True:
+            hull_points.append(self.points[cr_pt])
+            curr_pt = (cr_pt+1)%total_points
+            #check for orientation of all other Points
+            for i in range(0, total_points):
+                ort = self.ort(self.points[cr_pt], self.points[i], self.points[curr_pt])
+                if ort == CCW:
+                    curr_pt = i
+            cr_pt = curr_pt
+            if cr_pt == left_pt:
+                break
+        self.display_hull(hull_points)
+        return

@@ -40,9 +40,11 @@ class Triangle:
         x.append(self.pt1.get_x())
         x.append(self.pt2.get_x())
         x.append(self.pt3.get_x())
+        x.append(self.pt1.get_x())
         y.append(self.pt1.get_y())
         y.append(self.pt2.get_y())
         y.append(self.pt3.get_y())
+        y.append(self.pt1.get_y())
         plt.plot(x, y, "r-")
 
         #for test point

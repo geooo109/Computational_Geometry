@@ -30,7 +30,7 @@ def main():
         print ("Triangle contains (0,0)")
     else:
         print ("Triangle dosen't contain (0,0)")
-    #poss_trian.display_triangle_and_test_point(pt0)
+    poss_trian.display_triangle_and_test_point(pt0)
 
 
 if __name__ == "__main__":

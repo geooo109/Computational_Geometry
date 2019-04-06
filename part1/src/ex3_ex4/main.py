@@ -3,7 +3,7 @@ from plane import *
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-RANGE_XY = 100
+RANGE_XY = 10000
 def parse_input():
     points = []
     ch = raw_input("To autogenerate write ->AUTO<- else just type something: ")
