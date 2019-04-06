@@ -30,6 +30,7 @@ def main():
         print ("Triangle contains (0,0)")
     else:
         print ("Triangle dosen't contain (0,0)")
+    ch = raw_input("Do you want to Plot the Triangle and the (0,0) point? type (yes) or (not): ")
     poss_trian.display_triangle_and_test_point(pt0)
 
 

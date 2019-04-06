@@ -2,8 +2,9 @@ from point import *
 from plane import *
 import numpy as np
 import matplotlib.pyplot as plt
-import time
-RANGE_XY = 1000
+
+#CHANGE IF YOU WANT THE RANGE OF NUMBERS TO RANDOM GENERATE Points
+RANGE_XY = 100000
 def parse_input():
     points = []
     ch = raw_input("To autogenerate write ->AUTO<- else just type something: ")
@@ -34,13 +35,32 @@ def main():
     choice = raw_input("Type (1) for Incremental / Type (2) for Gift Wrap: ")
     while True:
         if choice == "1":
-            plane.incremental_convex_hull()
+            hull = plane.incremental_convex_hull()
+            if hull is None:
+                print "Couldn't compute Convex Hull"
+                return
+            print("**Hull Points**")
+            for pt in hull:
+                pt.print_point()
+            ch = raw_input("Do you want to Plot points with the Convex Hull? type (yes) or (no): ")
+            if ch == "yes":
+                plane.display_hull(hull)
             break
         elif choice == "2":
-            plane.gift_wrap_convex_hull()
+            hull = plane.gift_wrap_convex_hull()
+            if hull is None:
+                print "Couldn't compute Convex Hull"
+                return
+            print("**Hull Points**")
+            for pt in hull:
+                pt.print_point()
+            ch = raw_input("Do you want to Plot points with the Convex Hull? type (yes) or (no): ")
+            if ch == "yes":
+                plane.display_hull(hull)
             break
         else:
             print ("Wrong input Please choose again")
+            break
 
 if __name__ == "__main__":
     main()

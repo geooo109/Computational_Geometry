@@ -89,12 +89,16 @@ class Plane:
     def sort_function(self,point):
         return point.get_x()
 
+    '''
+        Input : The already Points from the input of the program
+        Retunrs a list of Points with the hull points
+    '''
     def incremental_convex_hull(self):
         lower_hull = []
         upper_hull = []
 
-        if len(self.points) <= 1:
-            return self.points
+        if len(self.points) <= 2:
+            return None
 
         #sorting list based on x coord {max -> min}
         self.points = sorted(self.points,key = self.sort_function, reverse = True)
@@ -136,15 +140,19 @@ class Plane:
             upper_hull.append(self.points[idx])
 
         hull = lower_hull + upper_hull
-        self.display_hull(hull)
-        return
+        return hull
 
-
+    '''
+        Input : The already Points from the input of the program
+        Retunrs a list of Points with the hull points
+    '''
     def gift_wrap_convex_hull(self):
         hull_points = []
         #find leftmost point
         left_pt = self.find_left_most_pt()
         total_points = len(self.points)
+        if total_points <= 2:
+            return None
         cr_pt = left_pt
         while True:
             hull_points.append(self.points[cr_pt])
@@ -157,5 +165,4 @@ class Plane:
             cr_pt = curr_pt
             if cr_pt == left_pt:
                 break
-        self.display_hull(hull_points)
-        return
+        return hull_points

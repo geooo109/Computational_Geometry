@@ -26,7 +26,10 @@ class Triangle:
                         +(self.pt3.get_x()*(self.pt1.get_y()-self.pt2.get_y()))))
 
     # True if point inside the triangle else False
-    # https://www.youtube.com/watch?v=H9qu9Xptf-w
+    '''
+        Input : the point we want to test
+        Output : True if the point is in our triagnle else False
+    '''
     def check_pt_triangle(self, pt_test):
         tr1 = Triangle(pt_test, self.pt1, self.pt2)
         tr2 = Triangle(pt_test, self.pt2, self.pt3)
