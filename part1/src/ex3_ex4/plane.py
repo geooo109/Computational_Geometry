@@ -129,7 +129,7 @@ class Plane:
                     elif ort == CCW:
                         break
                     else:
-                        print ("COLINEAR points in the lower_hull")
+                        print ("COLINEAR points in the upper_hull")
                         return
                 else:
                     break
