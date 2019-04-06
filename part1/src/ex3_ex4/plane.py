@@ -46,6 +46,14 @@ class Plane:
         else:
             return CCW
 
+    def cross(self, pt1 , pt2, r):
+        v = ((pt2.get_x()-pt1.get_x())*(r.get_y()-pt2.get_y())
+            -(pt2.get_y()-pt1.get_y())*(r.get_x()-pt2.get_x()))
+        if v <= 0:
+            return CW
+        else:
+            return CCW
+
     def display_hull(self, hull_points):
         if hull_points == []:
             print("No points on the hull list to display")
@@ -93,9 +101,7 @@ class Plane:
         # culculating lower hull #
         for idx in range(N):
             #print idx
-            while len(lowerHull) >= 2 and \
-                    (self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == CCW or \
-                    self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == COLINEAR):
+            while len(lowerHull) >= 2 and self.cross(lowerHull[-2], lowerHull[-1], self.points[idx]) == CW:
                 lowerHull.pop()
             lowerHull.append(self.points[idx])
 
