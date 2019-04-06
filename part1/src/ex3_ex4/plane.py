@@ -112,6 +112,7 @@ class Plane:
                         break
                     else:
                         print ("COLINEAR points in the lower_hull")
+                        return
                 else:
                     break
             lower_hull.append(self.points[idx])
@@ -129,6 +130,7 @@ class Plane:
                         break
                     else:
                         print ("COLINEAR points in the lower_hull")
+                        return
                 else:
                     break
             upper_hull.append(self.points[idx])
