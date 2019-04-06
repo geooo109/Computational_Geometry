@@ -5,12 +5,12 @@ COLINEAR = 0
 CCW = 1
 CW = -1
 
-def sort_function(point):
-        return point.get_x()
-
 class Plane:
     def __init__(self, points):
         self.points = points
+
+    def __getitem__(self, key):
+        return self.points[key]
 
     def get_points(self,points):
         return self.points
@@ -34,8 +34,8 @@ class Plane:
                     print("Poss are (%s,%s)"%(i,curr))
                     return True
             curr += 1
-        return False 
-        
+        return False
+
     def ort(self, pt1 , pt2, r):
         v = ((pt2.get_y()-pt1.get_y())*(r.get_x()-pt2.get_x())
             -(pt2.get_x()-pt1.get_x())*(r.get_y()-pt2.get_y()))
@@ -94,6 +94,44 @@ class Plane:
         self.display_hull(hull_points)
         return
 
+    def sort_function(self,point):
+        return point.get_x()
+
     def incremental_convex_hull(self):
-        sorted(self.points,key = sort_function)
-        self.print_plane()
+        lowerHull = []
+        upperHull = []
+
+        if len(self.points) == 0:
+            return self.points
+
+        #sorting list based on x coord
+        #self.print_plane()
+        self.points = sorted(self.points,key=self.sort_function)
+        #self.print_plane()
+        N = len(self.points)
+
+        # culculating lower hull #
+        for idx in range(N):
+            #print idx
+            while len(lowerHull) >= 2 and \
+                    (self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == CCW or \
+                    self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == COLINEAR):
+                lowerHull.pop()
+            lowerHull.append(self.points[idx])
+
+        # culculating upper hull #
+        self.points.reverse()
+        #self.print_plane()
+        for idx in range(N):
+            while len(upperHull) >= 2 and \
+                    (self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == CCW or \
+                    self.ort(lowerHull[-2], lowerHull[-1], self.points[idx]) == COLINEAR):
+                upperHull.pop()
+            upperHull.append(self.points[idx])
+
+        #pop common point
+        lowerHull.pop()
+        hull = lowerHull + upperHull
+        self.display_hull(lowerHull)
+        self.display_hull(upperHull)
+        self.display_hull(hull)
