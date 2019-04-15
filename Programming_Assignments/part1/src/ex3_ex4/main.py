@@ -37,7 +37,7 @@ def main():
         if choice == "1":
             hull = plane.incremental_convex_hull()
             if hull is None:
-                print "Couldn't compute Convex Hull"
+                print("Couldn't compute Convex Hull")
                 return
             print("**Hull Points**")
             for pt in hull:

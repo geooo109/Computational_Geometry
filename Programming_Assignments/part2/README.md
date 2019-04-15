@@ -1,3 +1,6 @@
+* Implemented with Python 3.6.7
+
+###  Tasks
 * Exercise 1. Compute Voronoi diagrams of different sets of vertices of your choice using
 the routine Voronoi (and its companion voronoi plot 2d for visualization) from the module
 scipy.spatial. Plot your results.

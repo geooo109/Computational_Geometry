@@ -11,7 +11,7 @@ def parse_input():
 def main():
     circle = parse_input()
     if circle is None:
-        print "Error on input radius"
+        print("Error on input radius")
         return
     circle.calc_latt()
 
