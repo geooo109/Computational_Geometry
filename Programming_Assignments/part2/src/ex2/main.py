@@ -3,7 +3,6 @@ from scipy.spatial import Delaunay
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 RANGE_XY = 100000
 def gen_points():
     num_points = int(input("Give number of Points to generate Dalauny Triangulation: "))
