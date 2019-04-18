@@ -12,16 +12,40 @@ def construct_poly(points):
     points.append(p1)
     return Polygon(p1, p2, p3, p4)
 
+def encloses_point(poly,point):
+    if poly.encloses_point(point) == False :
+        print("\nPolygon does not enclose :", point)
+    else :
+        print("\nPolygon encloses :", point)
+
+def encloses_poly(poly):
+    if poly.encloses(poly) == False :
+        print("\nPolygon does not enclose itself")
+    else :
+        print("\nPolygon does not enclose itself")
+
+def contains_point(path,point):
+    if path.contains_point(list(point),radius=0.1) == False :
+        print("\nPolygon does not enclose :", point)
+    else :
+        print("\nPolygon encloses :", point)
+
+def contains_poly(path,points):
+    if np.all(path.contains_points(points,radius=0.1)) == False :
+        print("\nPolygon does not enclose itself")
+    else :
+        print("\nPolygon encloses itself")
+
 def check_sympy(poly,p1,p2):
-    print(poly.encloses_point(p1))
-    print(poly.encloses_point(p2))
-    print(poly.encloses(poly))
+    encloses_point(poly,p1)
+    encloses_point(poly,p2)
+    encloses_poly(poly)
 
 def check_matplot(points,p1,p2):
     path = mpltPath.Path(points)
-    print(path.contains_point(list(p1),radius=0.1))
-    print(path.contains_point(list(p2),radius=0.1))
-    print(path.contains_points(points,radius=0.1))
+    contains_point(path,p1)
+    contains_point(path,p2)
+    contains_poly(path,points)
 
 def plot_poly(points,poly):
     x_val = [x[0] for x in points]
@@ -35,7 +59,11 @@ def plot_poly(points,poly):
     plt.plot(pa[0],pa[1],'ro')
     plt.plot(pb[0],pb[1],'ro')
     plt.show()
+    print("\n\nUsing sympy library:")
+    print("---------------------")
     check_sympy(poly,pa,pb)
+    print("\n\nUsing matplot library:")
+    print("-----------------------")
     check_matplot(points,pa,pb)
 
 def main():
