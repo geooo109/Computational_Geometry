@@ -22,7 +22,7 @@ class Plane:
         for point in self.points:
             point.print_point()
 
-    #this functions check if 2 points share shame x
+    #this functions check if 2 points share same x
     def check_points(self):
         curr = 0
         l_size = len(self.points)
